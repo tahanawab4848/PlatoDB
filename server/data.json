@@ -1,0 +1,573 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "Architect",
+      "email": "admin@flowforge.com"
+    },
+    {
+      "id": "u_1783097526196",
+      "name": "taha",
+      "email": "taha@taha.com",
+      "password": "1345678"
+    },
+    {
+      "id": "u_1783098073113",
+      "name": "taha",
+      "email": "taha1@taha.com",
+      "password": "12345678"
+    },
+    {
+      "id": "u_1783113993918",
+      "name": "Taha",
+      "email": "123@gmail.com",
+      "password": "12345678"
+    }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "userId": "u1",
+      "name": "E-Commerce Backend",
+      "updatedAt": "2026-07-03T16:50:08.346Z",
+      "tables": [],
+      "relations": [],
+      "history": []
+    },
+    {
+      "id": "proj_1783098363404",
+      "userId": "u_1783098073113",
+      "name": "New Database Project",
+      "updatedAt": "2026-07-03T17:06:03.404Z",
+      "tables": [],
+      "relations": [],
+      "history": []
+    },
+    {
+      "id": "proj_1783112900191",
+      "userId": "u_1783098073113",
+      "name": "New Database Project",
+      "updatedAt": "2026-07-03T21:08:20.191Z",
+      "tables": [],
+      "relations": [],
+      "history": []
+    },
+    {
+      "id": "proj_1783114010928",
+      "userId": "u_1783113993918",
+      "name": "New Database Project",
+      "updatedAt": "2026-07-03T21:40:04.942Z",
+      "tables": [
+        {
+          "id": "users_table",
+          "name": "users",
+          "reason": "This collection exists to store user information, such as login credentials and roles, keeping it distinct from other data to avoid duplication.",
+          "position": {
+            "x": 100,
+            "y": 100
+          },
+          "columns": [
+            {
+              "id": "user_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "username",
+              "name": "username",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "email",
+              "name": "email",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "password",
+              "name": "password",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "role",
+              "name": "role",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            }
+          ]
+        },
+        {
+          "id": "customers_table",
+          "name": "customers",
+          "reason": "This collection stores information about each customer, such as contact details and history with the company, allowing for efficient management of customer relationships.",
+          "position": {
+            "x": 450,
+            "y": 100
+          },
+          "columns": [
+            {
+              "id": "customer_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "name",
+              "name": "name",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "email",
+              "name": "email",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "phone",
+              "name": "phone",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": false,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "address",
+              "name": "address",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": false,
+              "isUnique": false,
+              "isAutoIncrement": false
+            }
+          ]
+        },
+        {
+          "id": "tickets_table",
+          "name": "tickets",
+          "reason": "This collection holds the core issues or requests from customers, making it easier to track and resolve support queries.",
+          "position": {
+            "x": 800,
+            "y": 100
+          },
+          "columns": [
+            {
+              "id": "ticket_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "customer_id",
+              "name": "customer_id",
+              "type": "ObjectId",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "issue",
+              "name": "issue",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "status",
+              "name": "status",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "created_at",
+              "name": "created_at",
+              "type": "Date",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            }
+          ]
+        },
+        {
+          "id": "interactions_table",
+          "name": "interactions",
+          "reason": "This collection logs every communication with customers, providing a clear history of support tickets and conversations.",
+          "position": {
+            "x": 100,
+            "y": 350
+          },
+          "columns": [
+            {
+              "id": "interaction_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "ticket_id",
+              "name": "ticket_id",
+              "type": "ObjectId",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "user_id",
+              "name": "user_id",
+              "type": "ObjectId",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "message",
+              "name": "message",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "created_at",
+              "name": "created_at",
+              "type": "Date",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "user_ticket_relation",
+          "fromTable": "users_table",
+          "fromColumn": "user_id",
+          "toTable": "interactions_table",
+          "toColumn": "user_id",
+          "type": "one-to-many"
+        },
+        {
+          "id": "customer_ticket_relation",
+          "fromTable": "customers_table",
+          "fromColumn": "customer_id",
+          "toTable": "tickets_table",
+          "toColumn": "customer_id",
+          "type": "one-to-many"
+        },
+        {
+          "id": "ticket_interaction_relation",
+          "fromTable": "tickets_table",
+          "fromColumn": "ticket_id",
+          "toTable": "interactions_table",
+          "toColumn": "ticket_id",
+          "type": "one-to-many"
+        }
+      ],
+      "history": [
+        {
+          "id": "snap_1783114804943",
+          "message": "Snapshot 1",
+          "timestamp": "2026-07-03T21:40:04.942Z",
+          "tables": [
+            {
+              "id": "users_table",
+              "name": "users",
+              "reason": "This collection exists to store user information, such as login credentials and roles, keeping it distinct from other data to avoid duplication.",
+              "position": {
+                "x": 100,
+                "y": 100
+              },
+              "columns": [
+                {
+                  "id": "user_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "username",
+                  "name": "username",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "email",
+                  "name": "email",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "password",
+                  "name": "password",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "role",
+                  "name": "role",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                }
+              ]
+            },
+            {
+              "id": "customers_table",
+              "name": "customers",
+              "reason": "This collection stores information about each customer, such as contact details and history with the company, allowing for efficient management of customer relationships.",
+              "position": {
+                "x": 450,
+                "y": 100
+              },
+              "columns": [
+                {
+                  "id": "customer_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "name",
+                  "name": "name",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "email",
+                  "name": "email",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "phone",
+                  "name": "phone",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": false,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "address",
+                  "name": "address",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": false,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                }
+              ]
+            },
+            {
+              "id": "tickets_table",
+              "name": "tickets",
+              "reason": "This collection holds the core issues or requests from customers, making it easier to track and resolve support queries.",
+              "position": {
+                "x": 800,
+                "y": 100
+              },
+              "columns": [
+                {
+                  "id": "ticket_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "customer_id",
+                  "name": "customer_id",
+                  "type": "ObjectId",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "issue",
+                  "name": "issue",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "status",
+                  "name": "status",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "created_at",
+                  "name": "created_at",
+                  "type": "Date",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                }
+              ]
+            },
+            {
+              "id": "interactions_table",
+              "name": "interactions",
+              "reason": "This collection logs every communication with customers, providing a clear history of support tickets and conversations.",
+              "position": {
+                "x": 100,
+                "y": 350
+              },
+              "columns": [
+                {
+                  "id": "interaction_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "ticket_id",
+                  "name": "ticket_id",
+                  "type": "ObjectId",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "user_id",
+                  "name": "user_id",
+                  "type": "ObjectId",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "message",
+                  "name": "message",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "created_at",
+                  "name": "created_at",
+                  "type": "Date",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "user_ticket_relation",
+              "fromTable": "users_table",
+              "fromColumn": "user_id",
+              "toTable": "interactions_table",
+              "toColumn": "user_id",
+              "type": "one-to-many"
+            },
+            {
+              "id": "customer_ticket_relation",
+              "fromTable": "customers_table",
+              "fromColumn": "customer_id",
+              "toTable": "tickets_table",
+              "toColumn": "customer_id",
+              "type": "one-to-many"
+            },
+            {
+              "id": "ticket_interaction_relation",
+              "fromTable": "tickets_table",
+              "fromColumn": "ticket_id",
+              "toTable": "interactions_table",
+              "toColumn": "ticket_id",
+              "type": "one-to-many"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
