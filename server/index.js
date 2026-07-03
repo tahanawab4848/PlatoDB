@@ -325,6 +325,37 @@ Return ONLY valid JSON:
   }
 });
 
+app.post('/api/learning-lab/chat', async (req, res) => {
+  try {
+    const { tables, topic, grade, messages } = req.body;
+    const schemaStr = JSON.stringify(tables.map(t => ({ name: t.name, columns: t.columns.map(c => ({ name: c.name, type: c.type, isPK: c.isPK, isUnique: c.isUnique })) })));
+    
+    const systemPrompt = `You are a strict but brilliant Computer Science Professor at a top university. 
+You just graded the student's database schema a "${grade}" on the topic of "${topic}".
+Student's Schema: ${schemaStr}
+
+The student is now asking you follow-up questions about their grade, their schema, or the theory behind it.
+Answer directly, concisely, and educationally. If they challenge you, explain the Computer Science theory (like Normalization, Big O, or CAP Theorem) using their specific tables as examples. DO NOT generate markdown code blocks or schemas, just converse.`;
+
+    const formattedMessages = [
+      { role: 'system', content: systemPrompt },
+      ...messages
+    ];
+
+    const comp = await groq.chat.completions.create({
+      messages: formattedMessages,
+      model: 'llama-3.3-70b-versatile',
+      temperature: 0.6,
+    });
+
+    res.json({ text: comp.choices[0].message.content });
+  } catch (error) {
+    console.error('Learning Lab Chat error:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 // ═══════════════════════════════════════════════════════════
 // Socket.io Multiplayer
 // ═══════════════════════════════════════════════════════════

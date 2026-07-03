@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, BookOpen, Database, Target, Search, LayoutList, Fingerprint, Cpu, ArrowRight, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowLeft, BookOpen, Database, Target, Search, LayoutList, Fingerprint, Cpu, ArrowRight, Sparkles, CheckCircle2, AlertCircle, MessageSquare, Send } from "lucide-react";
 import { useStore } from "../store/useStore";
 
 export default function LearningLab() {
@@ -9,13 +9,43 @@ export default function LearningLab() {
   const [activeTab, setActiveTab] = useState<"normalization" | "indexing" | "cap">("normalization");
   const [aiAnalysis, setAiAnalysis] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{role:string, content:string}[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
 
   const hasTables = tables.length > 0;
   const allHavePK = tables.every(t => t.columns.some(c => c.isPK));
 
+  const handleSendChat = async () => {
+    if (!chatInput.trim() || chatLoading) return;
+    const newMsg = { role: "user", content: chatInput };
+    const updatedMessages = [...chatMessages, newMsg];
+    setChatMessages(updatedMessages);
+    setChatInput("");
+    setChatLoading(true);
+
+    try {
+      const res = await fetch("/api/learning-lab/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tables, topic: activeTab, grade: aiAnalysis?.grade || "N/A", messages: updatedMessages })
+      });
+      const data = await res.json();
+      setChatMessages([...updatedMessages, { role: "assistant", content: data.text }]);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setChatLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!hasTables) return;
     
+    setChatOpen(false);
+    setChatMessages([]);
+
     const fetchAnalysis = async () => {
       setLoading(true);
       try {
@@ -161,6 +191,46 @@ export default function LearningLab() {
                             </ul>
                           </div>
                         )}
+
+                        {/* Discuss Button */}
+                        <div className="mt-4 pt-4 border-t border-emerald-500/20">
+                          <button onClick={() => setChatOpen(!chatOpen)} className="flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
+                            <MessageSquare className="w-4 h-4" /> {chatOpen ? "Close Discussion" : "Discuss with Professor"}
+                          </button>
+                        </div>
+                        
+                        {/* Chat Interface */}
+                        <AnimatePresence>
+                          {chatOpen && (
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="mt-4 overflow-hidden border border-emerald-500/20 rounded-xl bg-slate-900/50 flex flex-col">
+                              <div className="p-4 max-h-[300px] overflow-y-auto space-y-4 custom-scrollbar">
+                                {chatMessages.length === 0 && (
+                                  <p className="text-slate-400 text-sm italic text-center py-4">Ask the Professor to explain your grade or clarify the theory...</p>
+                                )}
+                                {chatMessages.map((m, i) => (
+                                  <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                    <div className={`max-w-[90%] p-3.5 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${m.role === 'user' ? 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-br-none shadow-lg shadow-emerald-500/20' : 'bg-[#012534] text-slate-200 border border-emerald-500/20 rounded-bl-none shadow-lg'}`}>
+                                      {m.content}
+                                    </div>
+                                  </div>
+                                ))}
+                                {chatLoading && (
+                                  <div className="flex justify-start">
+                                    <div className="max-w-[85%] p-4 rounded-xl text-sm bg-[#012534] border border-emerald-500/20 rounded-bl-none flex items-center gap-2 h-11">
+                                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                              <div className="p-3 bg-slate-950/80 border-t border-emerald-500/20 flex gap-2">
+                                <input type="text" value={chatInput} onChange={e => setChatInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSendChat()} disabled={chatLoading} placeholder="Challenge the AI Professor..." className="flex-1 bg-transparent text-sm text-slate-200 placeholder-slate-500 focus:outline-none px-2" />
+                                <button onClick={handleSendChat} disabled={!chatInput.trim() || chatLoading} className="p-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white disabled:opacity-50 transition-colors"><Send className="w-4 h-4" /></button>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     )}
 
