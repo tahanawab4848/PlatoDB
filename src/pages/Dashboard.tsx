@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Plus, Folder, Clock, Users, MoreVertical, Loader2, BookOpen, ArrowRight } from "lucide-react";
+import { Plus, Folder, Clock, Users, MoreVertical, Loader2, BookOpen, ArrowRight, Sparkles } from "lucide-react";
 import { useStore } from "../store/useStore";
 
 export default function Dashboard() {
@@ -68,6 +68,35 @@ export default function Dashboard() {
         <button onClick={handleCreateProject} disabled={creating} className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-medium transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] disabled:opacity-50">
           {creating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5" />} New Project
         </button>
+      </div>
+
+      <div className="bg-gradient-to-r from-emerald-900/30 to-[#012534] border border-emerald-500/30 rounded-2xl p-6 mb-8 relative overflow-hidden group shadow-[0_0_30px_rgba(16,185,129,0.05)]">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition-colors duration-500" />
+        <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2"><Sparkles className="w-5 h-5 text-emerald-400" /> Hackathon Judging Guide</h2>
+        <p className="text-slate-300 text-sm mb-6 max-w-3xl leading-relaxed">Welcome! To ensure you experience the full pedagogical power of PlatoDB, please follow this recommended flow to see all the hidden gems:</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative z-10">
+          <div className="bg-[#00111a]/80 border border-emerald-500/20 p-5 rounded-xl hover:border-emerald-500/50 transition-colors">
+            <div className="text-emerald-400 font-black text-[10px] uppercase tracking-widest mb-2">Step 1</div>
+            <h3 className="text-white font-bold mb-1">AI PM Setup</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">Click 'New Project' above to experience the staggering Socratic ChatWizard intro.</p>
+          </div>
+          <div className="bg-[#00111a]/80 border border-emerald-500/20 p-5 rounded-xl hover:border-emerald-500/50 transition-colors">
+            <div className="text-emerald-400 font-black text-[10px] uppercase tracking-widest mb-2">Step 2</div>
+            <h3 className="text-white font-bold mb-1">Visual IDE & Cmd+K</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">Drag tables, or press <kbd className="bg-slate-800 text-emerald-300 px-1.5 py-0.5 rounded font-mono border border-slate-700">⌘K</kbd> to build your schema via the command palette.</p>
+          </div>
+          <div className="bg-[#00111a]/80 border border-emerald-500/20 p-5 rounded-xl hover:border-emerald-500/50 transition-colors">
+            <div className="text-emerald-400 font-black text-[10px] uppercase tracking-widest mb-2">Step 3</div>
+            <h3 className="text-white font-bold mb-1">AI CTO Watchdog</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">Open the Right Sidebar in the IDE. The AI will physically grade your architecture live.</p>
+          </div>
+          <div className="bg-[#00111a]/80 border border-emerald-500/20 p-5 rounded-xl hover:border-emerald-500/50 transition-colors">
+            <div className="text-emerald-400 font-black text-[10px] uppercase tracking-widest mb-2">Step 4</div>
+            <h3 className="text-white font-bold mb-1">PDFs & CS Lab</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">Export your ERD Study Guide, and visit the dynamic CS Learning Lab below.</p>
+          </div>
+        </div>
       </div>
 
       <h2 className="text-lg font-semibold text-white mb-4">Quick Templates</h2>
