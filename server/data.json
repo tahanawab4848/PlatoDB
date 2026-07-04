@@ -22,6 +22,30 @@
       "name": "Taha",
       "email": "123@gmail.com",
       "password": "12345678"
+    },
+    {
+      "id": "u_1783123088287",
+      "name": "Demo User",
+      "email": "demo@example.com",
+      "password": "Password123"
+    },
+    {
+      "id": "u_1783124340884",
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "u_1783125924269",
+      "name": "Demo User",
+      "email": "demo_user_123@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "u_1783126365471",
+      "name": "Demo User",
+      "email": "demo_user_999@example.com",
+      "password": "password123"
     }
   ],
   "projects": [
@@ -38,10 +62,446 @@
       "id": "proj_1783098363404",
       "userId": "u_1783098073113",
       "name": "New Database Project",
-      "updatedAt": "2026-07-03T17:06:03.404Z",
-      "tables": [],
-      "relations": [],
-      "history": []
+      "updatedAt": "2026-07-04T00:56:38.759Z",
+      "tables": [
+        {
+          "id": "customers_table",
+          "name": "customers",
+          "reason": "This collection exists to store unique customer information in one place, making it easier to manage and update, and avoiding duplication of customer data across multiple tickets or interactions.",
+          "position": {
+            "x": 100,
+            "y": 100
+          },
+          "columns": [
+            {
+              "id": "customer_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "customer_name",
+              "name": "name",
+              "type": "String",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "customer_email",
+              "name": "email",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            }
+          ]
+        },
+        {
+          "id": "tickets_table",
+          "name": "tickets",
+          "reason": "This collection exists to track and manage customer issues or inquiries in a centralized manner, helping in organizing support requests and ensuring that no issue falls through the cracks.",
+          "position": {
+            "x": 450,
+            "y": 100
+          },
+          "columns": [
+            {
+              "id": "ticket_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "ticket_customer_id",
+              "name": "customer_id",
+              "type": "ObjectId",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "ticket_description",
+              "name": "description",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "ticket_status",
+              "name": "status",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            }
+          ]
+        },
+        {
+          "id": "agents_table",
+          "name": "agents",
+          "reason": "This collection exists to store information about the support agents themselves, such as their contact details, expertise, and workload, facilitating the efficient assignment of tickets to the right agents.",
+          "position": {
+            "x": 800,
+            "y": 100
+          },
+          "columns": [
+            {
+              "id": "agent_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "agent_name",
+              "name": "name",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "agent_email",
+              "name": "email",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "agent_expertise",
+              "name": "expertise",
+              "type": "Array",
+              "isPK": false,
+              "isNotNull": false,
+              "isUnique": false,
+              "isAutoIncrement": false
+            }
+          ]
+        },
+        {
+          "id": "interactions_table",
+          "name": "interactions",
+          "reason": "This collection exists to record every communication or action taken on a ticket, providing a clear history and audit trail, and avoiding confusion among stakeholders about what has been done and what needs to be done next.",
+          "position": {
+            "x": 100,
+            "y": 350
+          },
+          "columns": [
+            {
+              "id": "interaction_id",
+              "name": "_id",
+              "type": "ObjectId",
+              "isPK": true,
+              "isNotNull": true,
+              "isUnique": true,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "interaction_ticket_id",
+              "name": "ticket_id",
+              "type": "ObjectId",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "interaction_agent_id",
+              "name": "agent_id",
+              "type": "ObjectId",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "interaction_description",
+              "name": "description",
+              "type": "String",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            },
+            {
+              "id": "interaction_timestamp",
+              "name": "timestamp",
+              "type": "Date",
+              "isPK": false,
+              "isNotNull": true,
+              "isUnique": false,
+              "isAutoIncrement": false
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "customer_tickets_rel",
+          "fromTable": "customers_table",
+          "fromColumn": "customer_id",
+          "toTable": "tickets_table",
+          "toColumn": "ticket_customer_id",
+          "type": "one-to-many"
+        },
+        {
+          "id": "agent_interactions_rel",
+          "fromTable": "agents_table",
+          "fromColumn": "agent_id",
+          "toTable": "interactions_table",
+          "toColumn": "interaction_agent_id",
+          "type": "one-to-many"
+        },
+        {
+          "id": "ticket_interactions_rel",
+          "fromTable": "tickets_table",
+          "fromColumn": "ticket_id",
+          "toTable": "interactions_table",
+          "toColumn": "interaction_ticket_id",
+          "type": "one-to-many"
+        }
+      ],
+      "history": [
+        {
+          "id": "snap_1783126598759",
+          "message": "Snapshot 1",
+          "timestamp": "2026-07-04T00:56:38.759Z",
+          "tables": [
+            {
+              "id": "customers_table",
+              "name": "customers",
+              "reason": "This collection exists to store unique customer information in one place, making it easier to manage and update, and avoiding duplication of customer data across multiple tickets or interactions.",
+              "position": {
+                "x": 100,
+                "y": 100
+              },
+              "columns": [
+                {
+                  "id": "customer_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "customer_name",
+                  "name": "name",
+                  "type": "String",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "customer_email",
+                  "name": "email",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                }
+              ]
+            },
+            {
+              "id": "tickets_table",
+              "name": "tickets",
+              "reason": "This collection exists to track and manage customer issues or inquiries in a centralized manner, helping in organizing support requests and ensuring that no issue falls through the cracks.",
+              "position": {
+                "x": 450,
+                "y": 100
+              },
+              "columns": [
+                {
+                  "id": "ticket_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "ticket_customer_id",
+                  "name": "customer_id",
+                  "type": "ObjectId",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "ticket_description",
+                  "name": "description",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "ticket_status",
+                  "name": "status",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                }
+              ]
+            },
+            {
+              "id": "agents_table",
+              "name": "agents",
+              "reason": "This collection exists to store information about the support agents themselves, such as their contact details, expertise, and workload, facilitating the efficient assignment of tickets to the right agents.",
+              "position": {
+                "x": 800,
+                "y": 100
+              },
+              "columns": [
+                {
+                  "id": "agent_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "agent_name",
+                  "name": "name",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "agent_email",
+                  "name": "email",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "agent_expertise",
+                  "name": "expertise",
+                  "type": "Array",
+                  "isPK": false,
+                  "isNotNull": false,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                }
+              ]
+            },
+            {
+              "id": "interactions_table",
+              "name": "interactions",
+              "reason": "This collection exists to record every communication or action taken on a ticket, providing a clear history and audit trail, and avoiding confusion among stakeholders about what has been done and what needs to be done next.",
+              "position": {
+                "x": 100,
+                "y": 350
+              },
+              "columns": [
+                {
+                  "id": "interaction_id",
+                  "name": "_id",
+                  "type": "ObjectId",
+                  "isPK": true,
+                  "isNotNull": true,
+                  "isUnique": true,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "interaction_ticket_id",
+                  "name": "ticket_id",
+                  "type": "ObjectId",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "interaction_agent_id",
+                  "name": "agent_id",
+                  "type": "ObjectId",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "interaction_description",
+                  "name": "description",
+                  "type": "String",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                },
+                {
+                  "id": "interaction_timestamp",
+                  "name": "timestamp",
+                  "type": "Date",
+                  "isPK": false,
+                  "isNotNull": true,
+                  "isUnique": false,
+                  "isAutoIncrement": false
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "customer_tickets_rel",
+              "fromTable": "customers_table",
+              "fromColumn": "customer_id",
+              "toTable": "tickets_table",
+              "toColumn": "ticket_customer_id",
+              "type": "one-to-many"
+            },
+            {
+              "id": "agent_interactions_rel",
+              "fromTable": "agents_table",
+              "fromColumn": "agent_id",
+              "toTable": "interactions_table",
+              "toColumn": "interaction_agent_id",
+              "type": "one-to-many"
+            },
+            {
+              "id": "ticket_interactions_rel",
+              "fromTable": "tickets_table",
+              "fromColumn": "ticket_id",
+              "toTable": "interactions_table",
+              "toColumn": "interaction_ticket_id",
+              "type": "one-to-many"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "proj_1783112900191",
@@ -568,6 +1028,24 @@
           ]
         }
       ]
+    },
+    {
+      "id": "proj_1783123223080",
+      "userId": "u_1783123088287",
+      "name": "New Database Project",
+      "updatedAt": "2026-07-04T00:00:23.081Z",
+      "tables": [],
+      "relations": [],
+      "history": []
+    },
+    {
+      "id": "proj_1783126377637",
+      "userId": "u_1783126365471",
+      "name": "New Database Project",
+      "updatedAt": "2026-07-04T00:52:57.637Z",
+      "tables": [],
+      "relations": [],
+      "history": []
     }
   ]
 }

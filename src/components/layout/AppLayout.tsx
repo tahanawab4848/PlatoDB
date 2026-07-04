@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Database, Home, Layout, History, Settings, Zap, Server, LogOut, User, MessageSquare, ChevronLeft, ChevronRight } from "lucide-react";
+import { Database, Home, Layout, History, Settings, Zap, Server, LogOut, User, MessageSquare, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import { useStore } from "../../store/useStore";
 
 export default function AppLayout() {
-  const [isExpanded, setIsExpanded] = useState(false);
   const location = useLocation();
+  const [isExpanded, setIsExpanded] = useState(!location.pathname.includes("/designer"));
+  
+  useEffect(() => {
+    setIsExpanded(!location.pathname.includes("/designer"));
+  }, [location.pathname]);
+
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useStore();
   const navItems = [
     { name: "Dashboard", path: "/app/dashboard", icon: Home },
     { name: "AI Chat Wizard", path: "/app/setup", icon: MessageSquare },
     { name: "Visual Editor", path: "/app/designer", icon: Layout },
+    { name: "CS Learning Lab", path: "/app/learning-lab", icon: BookOpen },
     { name: "Infrastructure Hub", path: "/app/infrastructure", icon: Server },
     { name: "Settings", path: "/app/settings", icon: Settings },
   ];
