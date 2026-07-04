@@ -4,6 +4,9 @@
 
 PlatoDB (developed initially as FlowForge) is a world-class, premium SaaS database designer and educational utility platform. It blends a high-end, Linear-inspired "Void" UI with a powerful 12-agent AI orchestration engine to provide an unparalleled developer and learning experience.
 
+### 🎥 Live Demonstration
+<video src="https://github.com/tahanawab4848/PlatoDB/raw/main/public/demo.webm" autoplay loop muted playsinline width="100%"></video>
+
 Whether you are a seasoned architect designing robust database schemas or a student learning database normalization, PlatoDB acts as your intelligent AI CTO and interactive visual workspace.
 
 ## 🚀 Key Features
