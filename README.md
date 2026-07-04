@@ -106,10 +106,6 @@ platodb/
 └── package.json              # Project dependencies and scripts
 ```
 
-## 🏆 Hackathon Context
-
-PlatoDB was developed as a flagship project and finalist entry for the **USAII Global AI Hackathon 2026**. It represents a paradigm shift away from AI sycophancy, offering a "Decision Simulator" where AI provides critical, architecturally sound feedback rather than simply agreeing with the user.
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
