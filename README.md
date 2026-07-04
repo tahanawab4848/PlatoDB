@@ -6,7 +6,7 @@ PlatoDB (developed initially as FlowForge) is a world-class, premium SaaS databa
 
 ### 🎥 Live Demonstration
 
-<video src="public/demo.webm" controls autoplay loop muted playsinline width="100%"></video>
+[**👉 Click here to watch the Live Demonstration Video**](https://github.com/tahanawab4848/PlatoDB/blob/main/public/demo.webm)
 
 Whether you are a seasoned architect designing robust database schemas or a student learning database normalization, PlatoDB acts as your intelligent AI CTO and interactive visual workspace.
 
